@@ -75,6 +75,11 @@ function simplesamlphp_auth_requirements($phase) {
 function simplesamlphp_auth_check_library() {
   if (!class_exists('SimpleSAML_Configuration')) {
     $dir = Settings::get('simplesamlphp_dir');
+
+    if (empty($dir)) {
+      $dir = "/mnt/www/html/{$_ENV['AH_SITE_GROUP']}.{$_ENV['AH_SITE_ENVIRONMENT']}/simplesamlphp";
+    }
+    
     include_once $dir . '/lib/_autoload.php';
   }
 }
